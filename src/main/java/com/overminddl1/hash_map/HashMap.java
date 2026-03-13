@@ -50,21 +50,13 @@ public final class HashMap<K, V, Hasher extends com.overminddl1.hash_map.hashers
         Object[] old = this.keys_values;
         int old_items = this.items;
         this.init_buckets(this.capacity + additional);
-        int i = 0;
-        while(i < old.length) {
-            if(old[i] != null) {
-                K key = (K) old[i];
+        for (int i = 0; i < old.length; i += 2) {
+            Object k = old[i];
+            if (k != null) {
+                K key = (K) k;
                 int bucket = this.find(this.make_insert_hash(key), key);
                 this.keys_values[bucket] = key;
                 this.keys_values[bucket + 1] = old[i + 1];
-                i += 2;
-            } else {
-//                Integer j = (Integer)old[i+1];
-//                if(j != null) {
-//                    i += j;
-//                } else {
-                    i += 2;
-//                }
             }
         }
         this.items = old_items;
@@ -72,16 +64,16 @@ public final class HashMap<K, V, Hasher extends com.overminddl1.hash_map.hashers
     }
 
     private int find(int hash, K key) {
-        int idx = (hash & (this.keys_values.length/2 - 1)) * 2;
+        int len = this.keys_values.length;
+        int idx = (hash & (len / 2 - 1)) << 1;
         while(true) {
-            if(this.keys_values[idx] == null) {
+            Object k = this.keys_values[idx];
+            if(k == null) {
                 return idx;
-//            } else if(this.keys_values[idx] instanceof Integer) {
-//                idx += ((Integer)this.keys_values[idx]).intValue();
-            } else if(this.keys_values[idx].equals(key)) {
+            } else if(k.equals(key)) {
                 return idx;
             } else {
-                idx = (idx + 2) % this.keys_values.length;
+                idx = (idx + 2) & (len - 1);
             }
         }
     }

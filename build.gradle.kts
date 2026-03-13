@@ -35,6 +35,6 @@ jmh {
     warmupIterations.set(1)
     iterations.set(2)
     fork.set(2)
-    warmup.set("2s")
+    warmup.set("1s")
     timeOnIteration.set("1s")
 }
