@@ -14,6 +14,7 @@ repositories {
 dependencies {
     jmh("de.speiger:Primitive-Collections:0.9.0")
     jmh("it.unimi.dsi:fastutil:8.5.18")
+    jmh("io.github.bluuewhale:hashsmith:0.1.8")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
