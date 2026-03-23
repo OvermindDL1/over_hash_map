@@ -26,7 +26,8 @@ tasks.getByName<Test>("test") {
 
 jmh {
 //    includes.empty().add("put_over")
-    includes.empty().add("PutsObject")
+//    includes.empty().add("PutsObject")
+    includes.empty().add("GetsObject")
     excludes.add("Hashers")
 //    excludes.add("_pc_")
 //    excludes.add("_java_")
